@@ -17,6 +17,7 @@ class GameScene: SKScene {
     let rockCountLabel = SKLabelNode(fontNamed: "Chalkduster")
     let heartCountLabel = SKLabelNode(fontNamed: "Chalkduster")
     let batteryCountLabel = SKLabelNode(fontNamed: "Chalkduster")
+    let character = SKSpriteNode(imageNamed: "app-icon")
     
     var starCount: Int!
     var rockCount: Int!
@@ -33,6 +34,7 @@ class GameScene: SKScene {
         addFood()
         addStar()
         bottomCornerStats()
+        addGestures()
         
 
         
@@ -142,7 +144,7 @@ class GameScene: SKScene {
                 image = "battery"
                 label = batteryCountLabel
             default:
-                image = "star"
+                break
             }
             let object = SKSpriteNode(imageNamed: "\(image)")
             if image == "battery" {
@@ -175,10 +177,12 @@ class GameScene: SKScene {
     }
     
     func setInitialCharacterLoc(){
-        let character = SKSpriteNode(imageNamed: "app-icon")
+     //   let character = SKSpriteNode(imageNamed: "app-icon")
         character.size = CGSize(width: 64, height: 64)
         character.position = CGPoint(x:character.frame.size.width/2, y: character.frame.size.height/2 + 64)
+        character.physicsBody = SKPhysicsBody(rectangleOf: character.size, center: character.position)
         addChild(character)
+        character.physicsBody?.isDynamic = false
         maze.blockArray[0][0].hasBeenTaken = true
     }
     
@@ -223,6 +227,44 @@ class GameScene: SKScene {
         addChild(object)
         object.physicsBody?.isDynamic = false
     }
+    
+    func addGestures() {
+        let directions: [UISwipeGestureRecognizerDirection] = [.right, .left, .up, .down]
+        for direction in directions {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe(sender:)))
+            swipe.direction = direction
+        self.view?.addGestureRecognizer(swipe)
+        }
+    }
+    
+    @objc func respondToSwipe(sender: UISwipeGestureRecognizer) {
+        let currentX = character.anchorPoint.x
+        let currentY = character.anchorPoint.y
+        print(currentY)
+        
+        switch sender.direction {
+        case UISwipeGestureRecognizerDirection.left:
+            let move = SKAction.moveBy(x: 32, y: currentY, duration: 10)
+            character.run(move)
+            print("left")
+        case UISwipeGestureRecognizerDirection.right:
+            let move = SKAction.moveBy(x: 1302, y: currentY, duration: 10)
+            character.run(move)
+            print("right")
+        case UISwipeGestureRecognizerDirection.up:
+            let move = SKAction.moveBy(x: currentX, y: 864, duration: 10)
+            character.run(move)
+            print("up")
+        case UISwipeGestureRecognizerDirection.down:
+            let move = SKAction.moveBy(x: currentX, y: 0, duration: 10)
+            character.run(move)
+            print("down")
+        default:
+            break
+        }
+    }
+    
+    
 
     
     
