@@ -13,14 +13,27 @@ class GameScene: SKScene {
     
     var maze = CreateMaze()
     var blockCreationTimer = 0
+    let starCountLabel  = SKLabelNode(fontNamed: "Chalkduster")
+    let rockCountLabel = SKLabelNode(fontNamed: "Chalkduster")
+    let heartCountLabel = SKLabelNode(fontNamed: "Chalkduster")
+    let batteryCountLabel = SKLabelNode(fontNamed: "Chalkduster")
+    
+    var starCount: Int!
+    var rockCount: Int!
+    var heartCount: Int!
+    var batteryCount: Int!
+    
     
     override func didMove(to view: SKView) {
-        maze = CreateMaze()
-        blockCreationTimer = 0
+        initializeEverything()
         makeBackground()
         makeBounderies()
         startBlockTimer()
         setInitialCharacterLoc()
+        addFood()
+        addStar()
+        bottomCornerStats()
+        
 
         
 //        var circle = SKShapeNode!
@@ -32,6 +45,37 @@ class GameScene: SKScene {
 
        
     }
+    
+    func initializeEverything() {
+        maze = CreateMaze()
+        blockCreationTimer = 0
+        starCount = 0
+        rockCount = 10
+        heartCount = 3
+        batteryCount = 100
+        initializeLabels()
+
+    }
+    
+    func initializeLabels() {
+        starCountLabel.fontSize = 35
+        rockCountLabel.fontSize = 35
+        heartCountLabel.fontSize = 35
+        batteryCountLabel.fontSize = 35
+        
+        starCountLabel.fontColor = SKColor.white
+        rockCountLabel.fontColor = SKColor.white
+        heartCountLabel.fontColor = SKColor.white
+        batteryCountLabel.fontColor = SKColor.white
+        
+        starCountLabel.text = String(starCount)
+        rockCountLabel.text = String(rockCount)
+        heartCountLabel.text = String(heartCount)
+        batteryCountLabel.text = String(batteryCount)
+        
+        
+    }
+
     
     func startBlockTimer() {
         var blockCreationTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addRandomBlock(sender:)), userInfo: nil, repeats: true)
@@ -79,6 +123,46 @@ class GameScene: SKScene {
         makeBoundary(yloc: top1)
         
     }
+    
+    func bottomCornerStats() {
+        var image = ""
+        var label: SKLabelNode!
+        for i in 0...3 {
+            switch i {
+            case 0:
+                image = "star"
+                label = starCountLabel
+            case 1:
+                image = "rock"
+                label = rockCountLabel
+            case 2:
+                image = "heart"
+                label = heartCountLabel
+            case 3:
+                image = "battery"
+                label = batteryCountLabel
+            default:
+                image = "star"
+            }
+            let object = SKSpriteNode(imageNamed: "\(image)")
+            if image == "battery" {
+                object.size = CGSize(width: 100, height: 100)
+            } else {
+                object.size = CGSize(width: 64, height: 64)
+            }
+            object.position = CGPoint(x:object.frame.size.width/2 + CGFloat(64*i), y: 32)
+            label.position.x = object.position.x
+            label.position.y = 20
+            self.addChild(object)
+            self.addChild(label)
+        }
+    }
+    
+    func updateLabelCounts() {
+        
+    }
+
+
     func makeBoundary(yloc: CGFloat) {
         for i in 0...21 {
             let singleBlock = SKSpriteNode(imageNamed: "block")
@@ -109,6 +193,13 @@ class GameScene: SKScene {
         
     }
     
+
+    func addFood() {
+        addItem(itemToBe: "food")
+    }
+    func addStar() {
+        addItem(itemToBe: "star")
+    }
     func addItem(itemToBe: String) {
         var randX = Int(arc4random_uniform(20))
         var randY = Int(arc4random_uniform(10))
