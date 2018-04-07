@@ -59,6 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addStar()
         addDino1()
         addDino2()
+        addDino3()
         bottomCornerStats()
         createWater()
         addGestures()
@@ -92,6 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         startGetRockTimer()
         startEnergyDrainTimer()
         startDino1MoveTimer()
+        startDino2MoveTimer()
         startRespawnTimer()
 
     }
@@ -140,8 +142,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dino1Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino1Moves(sender:)), userInfo: nil, repeats: true)
     }
     
+    func startDino2MoveTimer() {
+        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino2Moves(sender:)), userInfo: nil, repeats: true)
+    }
+    
+//    func startDino3MoveTimer() {
+//        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(dino3Moves(sender:)), userInfo: nil, repeats: true)
+//    }
+    
     func startRespawnTimer() {
-        let dino1Timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(respawn(sender:)), userInfo: nil, repeats: true)
+        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(respawn(sender:)), userInfo: nil, repeats: true)
     }
     func makeBackground() {
         let background = SKSpriteNode(imageNamed: "bg")
@@ -270,7 +280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setInitialCharacterLoc(){
      //   let character = SKSpriteNode(imageNamed: "app-icon")
         character.size = CGSize(width: 64, height: 64)
-        character.position = CGPoint(x:character.frame.size.width/2, y: character.frame.size.height/2 + 64)
+        character.position = CGPoint(x:character.frame.size.width/2, y: character.frame.size.height/2 + (64))
         character.physicsBody = SKPhysicsBody(rectangleOf: character.size, center: character.anchorPoint)
         addChild(character)
         character.physicsBody?.isDynamic = true
@@ -320,6 +330,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func addDino3(){
+        dino3 = SKSpriteNode(imageNamed: "dino3")
+        
+      //  let spawn = CGFloat(arc4random_uniform(13))
+        var yPos: CGFloat = 0
+        dino3.size = CGSize(width: 64, height: 64)
+
+        
+        dino3.position = CGPoint(x: dino3.frame.size.width/2, y: dino3.frame.size.height/2 + (64*13))
+        dino3.physicsBody = SKPhysicsBody(rectangleOf: dino3.size, center: dino3.anchorPoint)
+        dino3.name = "dino3"
+        addChild(dino3)
+        dino3.physicsBody?.affectedByGravity = false
+        dino3.physicsBody?.allowsRotation = false
+        createCollisionBitmasks(item: "dino3", node: dino3)
+        
+    }
+    
     @objc func respawn(sender: Timer) {
         respawnTimer += 1
         if respawnTimer == 5 {
@@ -329,10 +357,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkForDinos() {
-        if (self.childNode(withName: "dino1") != nil) {
-            return
-        } else {
+        if (self.childNode(withName: "dino1") == nil) {
             addDino1()
+        }
+        if (self.childNode(withName: "dino2") == nil) {
+            addDino2()
         }
     }
     
@@ -503,6 +532,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    @objc func dino2Moves(sender: Timer){
+        //        if (self.childNode(withName: "dino1") == nil) {
+        //            sender.invalidate()
+        //        }
+        if dino2.action(forKey: "move") == nil{
+            var allActions = [SKAction]()
+            let waitTime = Double(arc4random_uniform(3))+1
+            let wait = SKAction.wait(forDuration: waitTime)
+            let moveLeft = SKAction.moveBy(x: -1300, y: 0, duration: 7)
+            let moveRight = SKAction.moveBy(x: 1300, y: 0, duration: 7)
+            allActions.append(wait)
+            allActions.append(moveLeft)
+            allActions.append(moveRight)
+            dino2.run(SKAction.sequence(allActions), withKey: "move")
+        }
+        
+    }
+    
     func createCollisionBitmasks(item: String, node: SKSpriteNode){
         switch item {
         case "block":
@@ -535,6 +582,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.physicsBody?.categoryBitMask = PhysicsCategory.Dino1
             node.physicsBody?.contactTestBitMask = PhysicsCategory.Character | PhysicsCategory.Rock
             node.physicsBody?.collisionBitMask = PhysicsCategory.Water | PhysicsCategory.Border
+            
+        case "dino2":
+            node.physicsBody?.categoryBitMask = PhysicsCategory.Dino2
+            node.physicsBody?.contactTestBitMask = PhysicsCategory.Character | PhysicsCategory.Rock
+            node.physicsBody?.collisionBitMask = PhysicsCategory.Border
         default:
             break
         }
@@ -634,7 +686,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (contact.bodyA.categoryBitMask == PhysicsCategory.Rock && contact.bodyB.categoryBitMask == PhysicsCategory.Dino1) || (contact.bodyB.categoryBitMask == PhysicsCategory.Rock && contact.bodyA.categoryBitMask == PhysicsCategory.Dino1){
             dino1.removeFromParent()
-           // print("Ouch")
+            
+        }
+        
+        if (contact.bodyA.categoryBitMask == PhysicsCategory.Character && contact.bodyB.categoryBitMask == PhysicsCategory.Dino2) || (contact.bodyB.categoryBitMask == PhysicsCategory.Character && contact.bodyA.categoryBitMask == PhysicsCategory.Dino2){
+            hurtByDino(whichOne: "dino2")
+            print("Ouch")
+            
+        }
+        
+        if (contact.bodyA.categoryBitMask == PhysicsCategory.Rock && contact.bodyB.categoryBitMask == PhysicsCategory.Dino2) || (contact.bodyB.categoryBitMask == PhysicsCategory.Rock && contact.bodyA.categoryBitMask == PhysicsCategory.Dino2){
+            dino2.removeFromParent()
             
         }
         
