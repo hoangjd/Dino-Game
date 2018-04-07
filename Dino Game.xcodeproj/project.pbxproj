@@ -15,6 +15,7 @@
 		D818687D2076BF7E00CE718D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D818687B2076BF7E00CE718D /* LaunchScreen.storyboard */; };
 		D81868882076BF7E00CE718D /* Dino_GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81868872076BF7E00CE718D /* Dino_GameTests.swift */; };
 		D81868932076BF7F00CE718D /* Dino_GameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81868922076BF7F00CE718D /* Dino_GameUITests.swift */; };
+		D825DF3620793D8600FC4C45 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825DF3520793D8600FC4C45 /* GameOver.swift */; };
 		D8AB111B2076CFDA0076A0B3 /* CreateMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB111A2076CFDA0076A0B3 /* CreateMaze.swift */; };
 		D8AB111D2076D6560076A0B3 /* SingleBlockLoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB111C2076D6560076A0B3 /* SingleBlockLoc.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		D818688E2076BF7F00CE718D /* Dino GameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dino GameUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81868922076BF7F00CE718D /* Dino_GameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dino_GameUITests.swift; sourceTree = "<group>"; };
 		D81868942076BF7F00CE718D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D825DF3520793D8600FC4C45 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		D8AB111A2076CFDA0076A0B3 /* CreateMaze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMaze.swift; sourceTree = "<group>"; };
 		D8AB111C2076D6560076A0B3 /* SingleBlockLoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBlockLoc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +114,7 @@
 				D818687E2076BF7E00CE718D /* Info.plist */,
 				D8AB111A2076CFDA0076A0B3 /* CreateMaze.swift */,
 				D8AB111C2076D6560076A0B3 /* SingleBlockLoc.swift */,
+				D825DF3520793D8600FC4C45 /* GameOver.swift */,
 			);
 			path = "Dino Game";
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				D8AB111B2076CFDA0076A0B3 /* CreateMaze.swift in Sources */,
 				D81868732076BF7E00CE718D /* GameScene.swift in Sources */,
 				D81868752076BF7E00CE718D /* GameViewController.swift in Sources */,
+				D825DF3620793D8600FC4C45 /* GameOver.swift in Sources */,
 				D818686D2076BF7E00CE718D /* AppDelegate.swift in Sources */,
 				D8AB111D2076D6560076A0B3 /* SingleBlockLoc.swift in Sources */,
 			);
