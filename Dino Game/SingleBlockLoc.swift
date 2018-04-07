@@ -10,6 +10,7 @@ import Foundation
 
 class SingleBlockLoc {
     var hasBeenTaken = false
+    var id: String?
     var locationX = 0
     var locationY = 0
 }
