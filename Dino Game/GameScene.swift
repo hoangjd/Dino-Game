@@ -785,6 +785,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             energyCount! -= damage
         } else {
             energyCount = 0
+            gameOver()
             print("Game Over")
             invalidateAllTimers()
         }
@@ -798,6 +799,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 energyCount=100
             } else {
                 print("Game Over")
+                gameOver()
                 sender.invalidate()
                 invalidateAllTimers()
             }
@@ -1013,17 +1015,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
 //    }
     
-//    func gameOver(){
-//        // transition to game over scene
-//        
-//        let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
-//        let gameOverScene = GameOver(size: self.size, won: true)
-//        gameOverScene.scaleMode = .aspectFill
-//        
-//        self.view?.presentScene(gameOverScene, transition: flipTransition)
-//        
-//        
-//    }
+    func gameOver(){
+        // transition to game over scene
+        
+        let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
+        let gameOverScene = GameOver(size: self.size, starCount: starCount)
+        gameOverScene.scaleMode = .aspectFill
+        
+        self.view?.presentScene(gameOverScene, transition: flipTransition)
+        
+        
+    }
     
     
     override func update(_ currentTime: TimeInterval) {
