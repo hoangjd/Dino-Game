@@ -37,6 +37,8 @@ class GameOver: SKScene {
         
         self.view?.presentScene(newScene, transition: flipTransition)
         
+        
+        
     //    button.removeFromSuperview()
         
     }
@@ -50,10 +52,20 @@ class GameOver: SKScene {
         button.titleLabel?.font = UIFont(name: "chalkDuster", size: 30)
         button.setTitle("Begin New Game", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
+        button.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
 
         self.view?.addSubview(button)
         
         
+    }
+    
+    @objc func goBack(sender: UIButton) {
+        let flipTransition = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
+        let newScene = GameScene(size: self.size)
+        newScene.scaleMode = .aspectFill
+        
+        self.view?.presentScene(newScene, transition: flipTransition)
+        button.removeFromSuperview()
     }
     
     
