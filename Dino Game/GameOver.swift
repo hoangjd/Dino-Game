@@ -13,12 +13,15 @@ class GameOver: SKScene {
 
     var button: UIButton!
     var starCount: Int!
+    var highScores: [Int]?
+    let score = SKLabelNode(fontNamed: "Chalkduster")
     
     init(size: CGSize, starCount: Int!) {
         super.init(size: size)
         
+        self.starCount = starCount
+        
         let gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
-        let score = SKLabelNode(fontNamed: "Chalkduster")
         gameOverLabel.text = ("GameOver")
         score.text = String(starCount!)
         
@@ -46,6 +49,46 @@ class GameOver: SKScene {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    func lookAtScores() -> [Int] {
+        var newArray: [Int] = [0, 0, 0]
+        if let highScoresDefault = UserDefaults.standard.object(forKey: "HighScores") as? [Int] {
+            print(highScoresDefault)
+            return (highScoresDefault)
+
+        } else {
+            UserDefaults.standard.set(newArray, forKey: "HighScores")
+            return(newArray)
+        }
+    }
+    
+    func updateScore(ourScore: Int) {
+//        resetDefaults()
+        for i in 0..<highScores!.count {
+            if ourScore >= highScores![i] {
+                highScores?.insert(ourScore, at: i)
+                highScores?.remove(at: 3)
+                break
+            }
+        }
+     //   UserDefaults.standard.set(highScores!, forKey: "HighScores")
+        updateDatabase()
+    }
+    
+    
+    func resetDefaults() {
+        UserDefaults.standard.removeObject(forKey: "HighScores")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func updateDatabase(){
+      //  let highScoreData = NSKeyedArchiver.archivedData(withRootObject: [Int](highScores!))
+        UserDefaults.standard.set([Int](highScores!), forKey: "HighScores")
+        UserDefaults.standard.synchronize()
+    }
+
+
 
     override func didMove(to view: SKView) {
         button = UIButton(frame: CGRect(x: self.size.width/2 - 142, y: size.height/2 + 50, width: 300, height: 100))
@@ -55,8 +98,28 @@ class GameOver: SKScene {
         button.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
 
         self.view?.addSubview(button)
+ //       resetDefaults()
+        highScores = lookAtScores()
+        updateScore(ourScore: self.starCount)
+        scoreLabelUpdate()
+        
+
         
         
+    }
+    
+    func scoreLabelUpdate() {
+        var scoreString: String = "HighScores "
+        for i in 0..<highScores!.count  {
+            if i < highScores!.count - 1 {
+                scoreString = scoreString + String(highScores![i])
+                scoreString = scoreString + String(", ")
+            } else {
+                scoreString = scoreString + String(highScores![i])
+            }
+            
+        }
+        score.text = scoreString
     }
     
     @objc func goBack(sender: UIButton) {

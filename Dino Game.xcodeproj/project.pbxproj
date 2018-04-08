@@ -18,6 +18,13 @@
 		D825DF3620793D8600FC4C45 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825DF3520793D8600FC4C45 /* GameOver.swift */; };
 		D8AB111B2076CFDA0076A0B3 /* CreateMaze.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB111A2076CFDA0076A0B3 /* CreateMaze.swift */; };
 		D8AB111D2076D6560076A0B3 /* SingleBlockLoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB111C2076D6560076A0B3 /* SingleBlockLoc.swift */; };
+		D8B432B8207A687F002A2E1D /* bite.wav in Resources */ = {isa = PBXBuildFile; fileRef = D8B432B7207A687F002A2E1D /* bite.wav */; };
+		D8B432BA207A688D002A2E1D /* death.wav in Resources */ = {isa = PBXBuildFile; fileRef = D8B432B9207A688D002A2E1D /* death.wav */; };
+		D8B432BC207A6C15002A2E1D /* chime_up.wav in Resources */ = {isa = PBXBuildFile; fileRef = D8B432BB207A6C14002A2E1D /* chime_up.wav */; };
+		D8B432BE207A6F35002A2E1D /* eat.wav in Resources */ = {isa = PBXBuildFile; fileRef = D8B432BD207A6F35002A2E1D /* eat.wav */; };
+		D8B432C0207A7165002A2E1D /* fireBall.wav in Resources */ = {isa = PBXBuildFile; fileRef = D8B432BF207A7165002A2E1D /* fireBall.wav */; };
+		D8B432C2207A72AB002A2E1D /* enemy.wav in Resources */ = {isa = PBXBuildFile; fileRef = D8B432C1207A72AB002A2E1D /* enemy.wav */; };
+		D8B432C4207A75C5002A2E1D /* throw.wav in Resources */ = {isa = PBXBuildFile; fileRef = D8B432C3207A75C4002A2E1D /* throw.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +62,13 @@
 		D825DF3520793D8600FC4C45 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		D8AB111A2076CFDA0076A0B3 /* CreateMaze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMaze.swift; sourceTree = "<group>"; };
 		D8AB111C2076D6560076A0B3 /* SingleBlockLoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBlockLoc.swift; sourceTree = "<group>"; };
+		D8B432B7207A687F002A2E1D /* bite.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bite.wav; sourceTree = "<group>"; };
+		D8B432B9207A688D002A2E1D /* death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death.wav; sourceTree = "<group>"; };
+		D8B432BB207A6C14002A2E1D /* chime_up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chime_up.wav; sourceTree = "<group>"; };
+		D8B432BD207A6F35002A2E1D /* eat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = eat.wav; sourceTree = "<group>"; };
+		D8B432BF207A7165002A2E1D /* fireBall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fireBall.wav; sourceTree = "<group>"; };
+		D8B432C1207A72AB002A2E1D /* enemy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = enemy.wav; sourceTree = "<group>"; };
+		D8B432C3207A75C4002A2E1D /* throw.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = throw.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +124,13 @@
 				D81868742076BF7E00CE718D /* GameViewController.swift */,
 				D81868762076BF7E00CE718D /* Main.storyboard */,
 				D81868792076BF7E00CE718D /* Assets.xcassets */,
+				D8B432B7207A687F002A2E1D /* bite.wav */,
+				D8B432B9207A688D002A2E1D /* death.wav */,
+				D8B432BB207A6C14002A2E1D /* chime_up.wav */,
+				D8B432BD207A6F35002A2E1D /* eat.wav */,
+				D8B432BF207A7165002A2E1D /* fireBall.wav */,
+				D8B432C1207A72AB002A2E1D /* enemy.wav */,
+				D8B432C3207A75C4002A2E1D /* throw.wav */,
 				D818687B2076BF7E00CE718D /* LaunchScreen.storyboard */,
 				D818687E2076BF7E00CE718D /* Info.plist */,
 				D8AB111A2076CFDA0076A0B3 /* CreateMaze.swift */,
@@ -244,9 +265,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8B432BA207A688D002A2E1D /* death.wav in Resources */,
+				D8B432C2207A72AB002A2E1D /* enemy.wav in Resources */,
+				D8B432B8207A687F002A2E1D /* bite.wav in Resources */,
 				D81868782076BF7E00CE718D /* Main.storyboard in Resources */,
+				D8B432BE207A6F35002A2E1D /* eat.wav in Resources */,
 				D818687A2076BF7E00CE718D /* Assets.xcassets in Resources */,
+				D8B432BC207A6C15002A2E1D /* chime_up.wav in Resources */,
+				D8B432C4207A75C5002A2E1D /* throw.wav in Resources */,
 				D818687D2076BF7E00CE718D /* LaunchScreen.storyboard in Resources */,
+				D8B432C0207A7165002A2E1D /* fireBall.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
